@@ -1,0 +1,236 @@
+@import "tailwindcss/preflight";
+@tailwind utilities;
+@import "tailwindcss";
+@config "../../tailwind.config.js";
+
+:root {
+  /* 亮色主题（黑白极简） */
+  --bg: #ffffff;
+  --text: #111111;
+  --muted: #666666;
+  --line: #e5e7eb;
+  --border: #111111;
+  --brand: #111111;
+  --accent: #111111;
+  --card-bg: #ffffff;
+  --tran1: #f8f9fa;
+  --tran2: #e9ecef;
+}
+
+/* 跟随系统偏好：深色模式 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111111;
+    --text: #f6f6f6;
+    --muted: #999999;
+    --line: #2a2a2a;
+    --border: #f6f6f6;
+    --brand: #f6f6f6;
+    --accent: #ffffff;
+    --card-bg: #1a1a1a;
+    --tran1: #2a2a2a;
+    --tran2: #3a3a3a;
+  }
+}
+
+/* 手动切换：同时兼容 [data-theme="dark"] 与 [dark] */
+[data-theme="dark"],
+[dark] {
+  --bg: #111111;
+  --text: #f6f6f6;
+  --muted: #999999;
+  --line: #2a2a2a;
+  --border: #f6f6f6;
+  --brand: #f6f6f6;
+  --accent: #ffffff;
+  --card-bg: #1a1a1a;
+      --tran1: #2a2a2a;
+    --tran2: #3a3a3a;
+}
+
+/* 手动切换到亮色 */
+[data-theme="light"] {
+  --bg: #ffffff;
+  --text: #111111;
+  --muted: #666666;
+  --line: #e5e7eb;
+  --border: #111111;
+  --brand: #111111;
+  --accent: #111111;
+  --card-bg: #ffffff;
+    --tran1: #f8f9fa;
+  --tran2: #e9ecef;
+}
+
+* {
+  box-sizing: border-box;
+  transition: color 1s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "SF Pro Text", Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.site-main {
+  max-width: 960px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+
+/* 现代化滚动条样式 - 适配主题 */
+/* Webkit浏览器 (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bg);
+  transform: scale(1.1);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--bg);
+}
+
+/* Firefox 滚动条样式 - 适配主题 */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--text);
+}
+
+/* 为特定容器添加更细的滚动条 */
+.dialog-body::-webkit-scrollbar,
+.compare-table::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.dialog-body::-webkit-scrollbar-thumb,
+.compare-table::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 3px;
+}
+
+.dialog-body::-webkit-scrollbar-thumb:hover,
+.compare-table::-webkit-scrollbar-thumb:hover {
+  background: var(--text);
+}
+
+/* 修复下拉选单显示问题 */
+select {
+  position: relative;
+  z-index: 10;
+}
+
+/* 确保下拉选单选项能够正常显示 */
+select option {
+  background: var(--bg);
+  color: var(--text);
+  padding: 8px 12px;
+}
+
+/* 为下拉选单容器添加足够的z-index */
+.controls select,
+[aria-label="筛选与排序"] select {
+  z-index: 50;
+}
+
+/* Header的下划线动画 */
+.site-nav {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
+  margin-right: 12px;
+}
+
+.site-nav a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.site-nav a.active {
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
+
+.site-nav a:hover {
+  transition: all 0.3s ease;
+  transform: translateY(-2px) scale(1.1);
+}
+
+.site-nav a::after {
+  content: "";
+  display: block;
+  width: 0%;
+  height: 2px;
+  background-color: var(--accent);
+
+}
+
+.site-nav a:hover::after {
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.site-nav a.active::after {
+  display: block;
+  height: 2px;
+  content: "";
+  width: 100%;
+  background-color: var(--accent);
+}
+
+@utility hint {
+  @apply text-black text-center p-8;
+}
+
+@utility rightArrow {
+  content: '';
+  transform: translateX(-20%);
+  transition: transform 0.2s ease;
+}
+
+@utility rightArrowHover {
+  content: '→';
+  transform: translateX(20%);
+}
+
+@utility leftArrow {
+  content: '';
+  transform: translateX(20%);
+  transition: transform 0.2s ease;
+}
+
+@utility leftArrowHover {
+  content: '←';
+  transform: translateX(-20%);
+}
