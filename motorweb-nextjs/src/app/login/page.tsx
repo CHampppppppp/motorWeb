@@ -29,10 +29,9 @@ const LoginPage = () => {
         {/* Logo 和标题 */}
         <div className="text-center">
           <Link href="/" className="inline-block mb-6">
-            <span className="text-4xl font-bold text-brand">MotorWeb</span>
+            <span className="text-4xl font-bold text-brand tracking-widest">MotorWeb</span>
+            <p className='text-sm text-muted'>对比 | 筛选 | 科普</p>
           </Link>
-          <h2 className="text-3xl font-bold text-text mb-2">欢迎回来</h2>
-          <p className="text-muted">登录您的账户</p>
         </div>
 
         {/* 登录表单 */}
@@ -84,7 +83,7 @@ const LoginPage = () => {
             </div>
 
             <div className="text-sm">
-              <a href="#" className="font-medium text-brand hover:text-accent">
+              <a href="#" className="font-medium text-brand hover:text-accent  after:underlinee hover:after:underlineeHover">
                 忘记密码？
               </a>
             </div>
@@ -93,26 +92,19 @@ const LoginPage = () => {
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-brand hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand transition-colors duration-200"
+              className="group relative w-full flex justify-center text-center py-2 px-4 border border-border text-sm font-medium rounded-md text-brand bg-card transition-all scale-98 hover:scale-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand duration-300 cursor-pointer"
             >
               登录
             </button>
           </div>
 
-          <div className="text-center">
+          <div className="text-center flex">
             <span className="text-muted">还没有账户？</span>
-            <a href="#" className="font-medium text-brand hover:text-accent ml-1">
+            <a href="/register" className="w-auto font-medium text-brand ml-1 after:underlinee hover:after:underlineeHover">
               立即注册
             </a>
           </div>
         </form>
-
-        {/* 返回首页链接 */}
-        <div className="text-center mt-6">
-          <Link href="/" className="text-muted hover:text-text transition-colors duration-200">
-            ← 返回首页
-          </Link>
-        </div>
       </div>
     </div>
   )
