@@ -44,8 +44,8 @@
   --brand: #f6f6f6;
   --accent: #ffffff;
   --card-bg: #1a1a1a;
-      --tran1: #2a2a2a;
-    --tran2: #3a3a3a;
+  --tran1: #2a2a2a;
+  --tran2: #3a3a3a;
 }
 
 /* 手动切换到亮色 */
@@ -58,7 +58,7 @@
   --brand: #111111;
   --accent: #111111;
   --card-bg: #ffffff;
-    --tran1: #f8f9fa;
+  --tran1: #f8f9fa;
   --tran2: #e9ecef;
 }
 
@@ -87,6 +87,14 @@ body {
   max-width: 960px;
   margin: 24px auto;
   padding: 0 16px;
+}
+
+/* 响应式容器 */
+@media (max-width: 640px) {
+  .site-main {
+    margin: 16px auto;
+    padding: 0 12px;
+  }
 }
 
 /* 现代化滚动条样式 - 适配主题 */

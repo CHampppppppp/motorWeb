@@ -3,10 +3,10 @@ import { Motorcycle, Filters } from '@/types';
 
 // 组件属性类型
 interface GridProps {
-  filters: Filters;
-  compareIds: string[];
-  onToggleCompare: (id: string) => void;
-  motorcycles: Motorcycle[];
+    filters: Filters;
+    compareIds: string[];
+    onToggleCompare: (id: string) => void;
+    motorcycles: Motorcycle[];
 }
 
 function formatPrice(num: number): string {
@@ -93,40 +93,49 @@ const Grid: React.FC<GridProps> = ({ filters, compareIds, onToggleCompare, motor
     return (
         <>
             <section className="text-muted py-6 px-3">共 {filtered.length} 款车型</section>
-            <section className="grid grid-cols-3 gap-4 items-stretch" aria-label="摩托车列表">
+            <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch" aria-label="摩托车列表">
                 {filtered.map((b: Motorcycle) => {
                     const selected = compareIds.includes(b.id)
 
                     return (
-                        <article className="bg-card border border-solid border-line rounded-lg shadow-sm overflow-hidden flex flex-col h-full transition-all duration-300 ease-in-out cursor-pointer hover:transform translate-y-[-3px] hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] hover:border-accent" key={b.id}>
-                            <div className="relative aspect-[4/3] bg-bg">
+                        <article className="bg-card border border-solid border-line rounded-lg shadow-sm overflow-hidden flex flex-col h-full transition-all duration-300 ease-in-out cursor-pointer hover:transform hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] hover:border-accent" key={b.id}>
+                            <div className="relative w-full bg-bg">
                                 {b.image ? (
-                                    <img className="w-full h-[300px] object-cover block" src={b.image} alt={`${b.brand} ${b.model}`} />
+                                    <img className="w-full aspect-[8/9] object-cover block" src={b.image} alt={`${b.brand} ${b.model}`} />
                                 ) : (
-                                    <div className="w-full h-full flex items-center justify-center text-muted font-bold tracking-[0.4px] bg-gradient-to-br from-tran1 to-tran2">{b.brand} {b.model}</div>
+                                    <div className="w-full aspect-[4/3] flex items-center justify-center text-muted font-bold tracking-[0.4px] bg-gradient-to-br from-tran1 to-tran2 text-center px-2 text-sm sm:text-base">{b.brand} {b.model}</div>
                                 )}
                             </div>
                             <header className="flex items-center justify-between py-3 px-4 border-b border-solid border-line">
-                                <div className="font-bold">{b.brand} {b.model}</div>
-                                <div className="text-sm text-muted bg-bg py-1 px-2 rounded-[999px]">{b.type}  {b.year}</div>
+                                <div className="font-bold text-sm sm:text-base truncate">{b.brand} {b.model}</div>
+                                <div className="text-xs sm:text-sm text-muted bg-bg py-1 px-2 rounded-[999px] whitespace-nowrap ml-2">{b.type} {b.year}</div>
                             </header>
-                            <div className="p-2 grid grid-cols-3 gap-1">
+                            <div className="p-2 grid grid-cols-2 sm:grid-cols-3 gap-1">
                                 <Stat label="排量 (cc)" value={b.displacement_cc} />
                                 <Stat label="功率 (kW)" value={b.power_kw} />
                                 <Stat label="扭矩 (Nm)" value={b.torque_nm} />
                                 <Stat label="整备质量 (kg)" value={b.weight_kg} />
                                 <Stat label="座高 (mm)" value={b.seat_height_mm} />
                                 <Stat label="缸数" value={b.cylinder_count} />
-                                <Stat label="极速(kmh)" value={b.top_speed_kmh} />
-                                <Stat label="零百/h(s)" value={b.accel_0_100_kmh} />
-                                <Stat label="价格" value={formatPrice(b.price_cny)} />
+                                <div className="sm:hidden col-span-2">
+                                    <Stat label="价格" value={formatPrice(b.price_cny)} />
+                                </div>
+                                <div className="hidden sm:block">
+                                    <Stat label="极速(kmh)" value={b.top_speed_kmh} />
+                                </div>
+                                <div className="hidden sm:block">
+                                    <Stat label="零百/h(s)" value={b.accel_0_100_kmh} />
+                                </div>
+                                <div className="hidden sm:block">
+                                    <Stat label="价格" value={formatPrice(b.price_cny)} />
+                                </div>
                             </div>
                             <div className="mt-auto flex flex-col border-t border-solid border-line">
-                                <div className="mt-1 flex justify-center mr-5 mb-1 text-muted" style={{ gridColumn: "1 / -1" }}>
+                                <div className="mt-1 flex justify-center mr-5 mb-1 text-muted text-xs sm:text-sm text-center px-2" style={{ gridColumn: "1 / -1" }}>
                                     配置：{b.abs ? "ABS" : "无 ABS"}{b.tcs ? " / TCS" : ""}{b.aw ? " / AW" : ""} / {b.cooling}
                                 </div>
                                 <button
-                                    className={`bg-bg  text-text border border-solid border-line py-2 px-2.5 rounded-[8px] cursor-pointer ${selected ? ' w-full h-full rounded-0 bg-accent text-text border-accent ' : ''}`}
+                                    className={`bg-bg text-text border border-solid border-line py-2 px-2.5 rounded-[8px] cursor-pointer transition-all duration-200 text-sm sm:text-base ${selected ? 'w-full h-full rounded-0 bg-accent text-text border-accent' : 'hover:bg-tran1'}`}
                                     type="button"
                                     onClick={() => onToggleCompare?.(b.id)}
                                 >

@@ -47,8 +47,9 @@ const Controls: React.FC<ControlsProps> = ({ filters, onFilterChange, onResetFil
   }
 
   return (
-    <section className="grid grid-cols-12 gap-3 mb-3" aria-label="筛选与排序">
-      <div className="col-span-12 bg-card border border-line rounded-lg p-2.5 shadow-sm">
+    <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 mb-3" aria-label="筛选与排序">
+      {/* 搜索框 - 全宽 */}
+      <div className="col-span-1 sm:col-span-2 lg:col-span-12 bg-card border border-line rounded-lg p-2.5 shadow-sm">
         <label htmlFor="search" className="block text-muted text-xs mb-1.5">搜索 (品牌/车型)：</label>
         <input
           id="search"
@@ -61,9 +62,8 @@ const Controls: React.FC<ControlsProps> = ({ filters, onFilterChange, onResetFil
         />
       </div>
 
-
-
-      <div className="col-span-3 bg-card border border-line rounded-lg p-2.5 shadow-sm">
+      {/* 车型类型 */}
+      <div className="col-span-1 sm:col-span-1 lg:col-span-3 bg-card border border-line rounded-lg p-2.5 shadow-sm">
         <label htmlFor="type" className="block text-muted text-xs mb-1.5">车型类型：</label>
         <select
           id="type"
@@ -81,7 +81,8 @@ const Controls: React.FC<ControlsProps> = ({ filters, onFilterChange, onResetFil
         </select>
       </div>
 
-      <div className="col-span-3 bg-card border border-line rounded-lg p-2.5 shadow-sm">
+      {/* 排序 */}
+      <div className="col-span-1 sm:col-span-1 lg:col-span-3 bg-card border border-line rounded-lg p-2.5 shadow-sm">
         <label htmlFor="sort" className="block text-muted text-xs mb-1.5">排序：</label>
         <select
           id="sort"
@@ -99,47 +100,52 @@ const Controls: React.FC<ControlsProps> = ({ filters, onFilterChange, onResetFil
         </select>
       </div>
 
-      <div className="col-span-6 bg-card border border-line rounded-lg p-2.5 shadow-sm flex items-center gap-2">
-        <label className="text-muted text-xs">价格区间 (¥)：</label>
-        <input
-          id="price-min"
-          type="number"
-          inputMode="numeric"
-          placeholder="低"
-          value={filters.priceMin}
-          onChange={e => update('priceMin', e.target.value)}
-          className="flex-1 placeholder:text-sm bg-bg text-text border border-line rounded-md py-1"
-        />
-        <span className="text-muted">—</span>
-        <input
-          id="price-max"
-          type="number"
-          inputMode="numeric"
-          placeholder="高"
-          value={filters.priceMax}
-          onChange={e => update('priceMax', e.target.value)}
-          className="flex-1 placeholder:text-sm bg-bg text-text border border-line rounded-md py-1"
-        />
+      {/* 价格区间 */}
+      <div className="col-span-1 sm:col-span-2 lg:col-span-6 bg-card border border-line rounded-lg p-2.5 shadow-sm">
+        <label className="block text-muted text-xs mb-1.5">价格区间 (¥)：</label>
+        <div className="flex items-center gap-2">
+          <input
+            id="price-min"
+            type="number"
+            inputMode="numeric"
+            placeholder="低"
+            value={filters.priceMin}
+            onChange={e => update('priceMin', e.target.value)}
+            className="flex-1 placeholder:text-sm bg-bg text-text border border-line rounded-md px-2 py-1"
+          />
+          <span className="text-muted">—</span>
+          <input
+            id="price-max"
+            type="number"
+            inputMode="numeric"
+            placeholder="高"
+            value={filters.priceMax}
+            onChange={e => update('priceMax', e.target.value)}
+            className="flex-1 placeholder:text-sm bg-bg text-text border border-line rounded-md px-2 py-1"
+          />
+        </div>
       </div>
 
-      <div className="col-span-3 bg-card border border-line rounded-lg p-2.5 shadow-sm">
-          <label htmlFor="cylinder" className="block text-muted text-xs mb-1.5">缸数：</label>
-          <select
-            id="cylinder"
-            value={filters.cylinderCount}
-            onChange={e => update('cylinderCount', e.target.value)}
-            className="w-full bg-bg text-text border border-line rounded-md px-2.5 py-2"
-          >
-            <option value="">全部</option>
-            <option value="1">单缸</option>
-            <option value="2">双缸</option>
-            <option value="3">三缸</option>
-            <option value="4">四缸</option>
-            <option value="6">六缸</option>
-          </select>
-        </div>
+      {/* 缸数 */}
+      <div className="col-span-1 sm:col-span-1 lg:col-span-3 bg-card border border-line rounded-lg p-2.5 shadow-sm">
+        <label htmlFor="cylinder" className="block text-muted text-xs mb-1.5">缸数：</label>
+        <select
+          id="cylinder"
+          value={filters.cylinderCount}
+          onChange={e => update('cylinderCount', e.target.value)}
+          className="w-full bg-bg text-text border border-line rounded-md px-2.5 py-2"
+        >
+          <option value="">全部</option>
+          <option value="1">单缸</option>
+          <option value="2">双缸</option>
+          <option value="3">三缸</option>
+          <option value="4">四缸</option>
+          <option value="6">六缸</option>
+        </select>
+      </div>
 
-      <div className="col-span-3 bg-card border border-line rounded-lg p-2.5 shadow-sm">
+      {/* ABS */}
+      <div className="col-span-1 sm:col-span-1 lg:col-span-3 bg-card border border-line rounded-lg p-2.5 shadow-sm">
         <label htmlFor="abs" className="block text-muted text-xs mb-1.5">ABS：</label>
         <select
           id="abs"
@@ -153,30 +159,34 @@ const Controls: React.FC<ControlsProps> = ({ filters, onFilterChange, onResetFil
         </select>
       </div>
 
-      <div className="col-span-6 bg-card border border-line rounded-lg p-2.5 shadow-sm flex items-center gap-2">
-        <label className="text-muted text-xs">排量区间 (cc)：</label>
-        <input
-          id="cc-min"
-          type="number"
-          inputMode="numeric"
-          placeholder="低"
-          value={filters.ccMin}
-          onChange={e => update('ccMin', e.target.value)}
-          className="flex-1 placeholder:text-sm bg-bg text-text border border-line rounded-md py-1"
-        />
-        <span className="text-muted">—</span>
-        <input
-          id="cc-max"
-          type="number"
-          inputMode="numeric"
-          placeholder="高"
-          value={filters.ccMax}
-          onChange={e => update('ccMax', e.target.value)}
-          className="flex-1 placeholder:text-sm bg-bg text-text border border-line rounded-md py-1"
-        />
+      {/* 排量区间 */}
+      <div className="col-span-1 sm:col-span-2 lg:col-span-6 bg-card border border-line rounded-lg p-2.5 shadow-sm">
+        <label className="block text-muted text-xs mb-1.5">排量区间 (cc)：</label>
+        <div className="flex items-center gap-2">
+          <input
+            id="cc-min"
+            type="number"
+            inputMode="numeric"
+            placeholder="低"
+            value={filters.ccMin}
+            onChange={e => update('ccMin', e.target.value)}
+            className="flex-1 placeholder:text-sm bg-bg text-text border border-line rounded-md px-2 py-1"
+          />
+          <span className="text-muted">—</span>
+          <input
+            id="cc-max"
+            type="number"
+            inputMode="numeric"
+            placeholder="高"
+            value={filters.ccMax}
+            onChange={e => update('ccMax', e.target.value)}
+            className="flex-1 placeholder:text-sm bg-bg text-text border border-line rounded-md px-2 py-1"
+          />
+        </div>
       </div>
 
-      <div className="col-span-6 bg-card border border-line rounded-lg p-2.5 shadow-sm">
+      {/* 品牌 */}
+      <div className="col-span-1 sm:col-span-2 lg:col-span-6 bg-card border border-line rounded-lg p-2.5 shadow-sm">
         <label htmlFor="brand" className="block text-muted text-xs mb-1.5">品牌：</label>
         <select
           id="brand"
@@ -189,28 +199,32 @@ const Controls: React.FC<ControlsProps> = ({ filters, onFilterChange, onResetFil
         </select>
       </div>
 
-      <div className="col-span-6 bg-card border border-line rounded-lg p-2.5 shadow-sm flex items-center gap-2">
-        <label className="text-muted text-xs">年份区间：</label>
-        <input
-          type="number"
-          inputMode="numeric"
-          placeholder="低"
-          value={filters.yearMin}
-          onChange={e => update('yearMin', e.target.value)}
-          className="flex-1 placeholder:text-sm bg-bg text-text border border-line rounded-md py-1"
-        />
-        <span className="text-muted">—</span>
-        <input
-          type="number"
-          inputMode="numeric"
-          placeholder="高"
-          value={filters.yearMax}
-          onChange={e => update('yearMax', e.target.value)}
-          className="flex-1 placeholder:text-sm bg-bg text-text border border-line rounded-md py-1"
-        />
+      {/* 年份区间 */}
+      <div className="col-span-1 sm:col-span-2 lg:col-span-6 bg-card border border-line rounded-lg p-2.5 shadow-sm">
+        <label className="block text-muted text-xs mb-1.5">年份区间：</label>
+        <div className="flex items-center gap-2">
+          <input
+            type="number"
+            inputMode="numeric"
+            placeholder="低"
+            value={filters.yearMin}
+            onChange={e => update('yearMin', e.target.value)}
+            className="flex-1 placeholder:text-sm bg-bg text-text border border-line rounded-md px-2 py-1"
+          />
+          <span className="text-muted">—</span>
+          <input
+            type="number"
+            inputMode="numeric"
+            placeholder="高"
+            value={filters.yearMax}
+            onChange={e => update('yearMax', e.target.value)}
+            className="flex-1 placeholder:text-sm bg-bg text-text border border-line rounded-md px-2 py-1"
+          />
+        </div>
       </div>
 
-      <div className="col-span-3 bg-card border border-line rounded-lg p-2.5 shadow-sm">
+      {/* TCS */}
+      <div className="col-span-1 sm:col-span-1 lg:col-span-3 bg-card border border-line rounded-lg p-2.5 shadow-sm">
         <label htmlFor="tcs" className="block text-muted text-xs mb-1.5">TCS：</label>
         <select
           id="tcs"
@@ -224,7 +238,8 @@ const Controls: React.FC<ControlsProps> = ({ filters, onFilterChange, onResetFil
         </select>
       </div>
 
-      <div className="col-span-3 bg-card border border-line rounded-lg p-2.5 shadow-sm">
+      {/* 冷却方式 */}
+      <div className="col-span-1 sm:col-span-1 lg:col-span-3 bg-card border border-line rounded-lg p-2.5 shadow-sm">
         <label htmlFor="cooling" className="block text-muted text-xs mb-1.5">冷却方式：</label>
         <select
           id="cooling"
@@ -239,33 +254,60 @@ const Controls: React.FC<ControlsProps> = ({ filters, onFilterChange, onResetFil
         </select>
       </div>
 
-      <div className="col-span-6 bg-card border border-line rounded-lg p-2.5 shadow-sm flex items-center gap-2">
-        <label className="text-muted text-xs">整备质量区间 (kg)：</label>
-        <input
-          type="number"
-          inputMode="numeric"
-          placeholder="低"
-          value={filters.weightMin}
-          onChange={e => update('weightMin', e.target.value)}
-          className="flex-1 placeholder:text-sm bg-bg text-text border border-line rounded-md py-1"
-        />
-        <span className="text-muted">—</span>
-        <input
-          type="number"
-          inputMode="numeric"
-          placeholder="高"
-          value={filters.weightMax}
-          onChange={e => update('weightMax', e.target.value)}
-          className="flex-1 placeholder:text-sm bg-bg text-text border border-line rounded-md py-1"
-        />
+      {/* 整备质量区间 */}
+      <div className="col-span-1 sm:col-span-2 lg:col-span-6 bg-card border border-line rounded-lg p-2.5 shadow-sm">
+        <label className="block text-muted text-xs mb-1.5">整备质量区间 (kg)：</label>
+        <div className="flex items-center gap-2">
+          <input
+            type="number"
+            inputMode="numeric"
+            placeholder="低"
+            value={filters.weightMin}
+            onChange={e => update('weightMin', e.target.value)}
+            className="flex-1 placeholder:text-sm bg-bg text-text border border-line rounded-md px-2 py-1"
+          />
+          <span className="text-muted">—</span>
+          <input
+            type="number"
+            inputMode="numeric"
+            placeholder="高"
+            value={filters.weightMax}
+            onChange={e => update('weightMax', e.target.value)}
+            className="flex-1 placeholder:text-sm bg-bg text-text border border-line rounded-md px-2 py-1"
+          />
+        </div>
       </div>
 
+      {/* 座高区间 */}
+      <div className="col-span-1 sm:col-span-2 lg:col-span-6 bg-card border border-line rounded-lg p-2.5 shadow-sm">
+        <label className="block text-muted text-xs mb-1.5">座高区间 (mm)：</label>
+        <div className="flex items-center gap-2">
+          <input
+            type="number"
+            inputMode="numeric"
+            placeholder="低"
+            value={filters.seatMin}
+            onChange={e => update('seatMin', e.target.value)}
+            className="flex-1 placeholder:text-sm bg-bg text-text border border-line rounded-md px-2 py-1"
+          />
+          <span className="text-muted">—</span>
+          <input
+            type="number"
+            inputMode="numeric"
+            placeholder="高"
+            value={filters.seatMax}
+            onChange={e => update('seatMax', e.target.value)}
+            className="flex-1 placeholder:text-sm bg-bg text-text border border-line rounded-md px-2 py-1"
+          />
+        </div>
+      </div>
 
+      {/* 重置按钮 */}
+      <div className="col-span-1 sm:col-span-2 lg:col-span-12 flex gap-2.5">
 
-      <div className="col-span-12 flex gap-2.5">
         <button
           onClick={onResetFilters}
-          className="bg-bg text-text border border-accent px-3 py-2.5 rounded-lg font-semibold cursor-pointer transition-transform duration-50
+          className="bg-bg text-text border border-accent px-3 py-2.5 rounded-lg font-semibold cursor-pointer transition-all duration-100
           hover:scale-101 w-full"
         >
           重置筛选
