@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
+import MotorLogo from './MotorLogo'
 
 //Header，头部导航栏
 const Header = () => {
@@ -57,57 +58,39 @@ const Header = () => {
     <header className="sticky top-0 z-500 flex items-center justify-between py-3 px-4 sm:px-5 bg-bg border-b border-solid border-line">
       {/* Logo区域 - 在小屏幕上缩小 */}
       <div className="font-bold tracking-[0.3px] cursor-pointer relative transform scale-100 sm:scale-120 ml-1 sm:ml-3">
-        <Link id="brand-link" href="/" className="text-text no-underline relative inline-block group" aria-label="主页">
-          <span className="inline-flex gap-0.5 items-end leading-[1]" aria-hidden="true">
-            <span className="inline-block transition-transform duration-250 ease-in-out group-hover:animate-press-bounce" style={{ animationDelay: '2500ms' }}>m</span>
-            <span className="letter group-hover:animate-press-bounce" style={{ animationDelay: '2400ms' }}>o</span>
-            <span className="letter group-hover:animate-press-bounce" style={{ animationDelay: '2300ms' }}>t</span>
-            <span className="letter group-hover:animate-press-bounce" style={{ animationDelay: '2200ms' }}>o</span>
-            <span className="letter group-hover:animate-press-bounce" style={{ animationDelay: '2100ms' }}>r</span>
-            <span className="letter group-hover:animate-press-bounce" style={{ animationDelay: '2000ms' }}>W</span>
-            <span className="letter group-hover:animate-press-bounce" style={{ animationDelay: '1900ms' }}>e</span>
-            <span className="letter group-hover:animate-press-bounce" style={{ animationDelay: '1800ms' }}>b</span>
-          </span>
-          <span
-            className="absolute -right-6 sm:-right-10 -top-3 inline-block opacity-0 transform-gpu will-change-transform pointer-events-none transition-all duration-300 ease-in-out group-hover:opacity-100
-            group-hover:animate-bike-move"
-            aria-hidden="true"
-          >
-            🏍️
-          </span>
-        </Link>
+        <MotorLogo />
       </div>
 
       {/* 导航区域 - 响应式布局 */}
-      <div className="flex items-center gap-2 sm:gap-4">
+      <div className="site-nav flex items-center gap-2 sm:gap-4">
         <nav className="flex items-center gap-3 sm:gap-6" aria-label="主导航">
           <Link 
-            href="/" 
-            className={`text-sm sm:text-base transition-all duration-200 hover:text-brand ${
+            href="/"
+            className={
               pathname === '/' 
-                ? 'text-brand font-medium border-b-2 border-brand pb-1' 
-                : 'text-text hover:scale-105'
-            }`}
+                ? 'active' 
+                : ''
+            } 
           >
             首页
           </Link>
           <Link 
             href="/posts" 
-            className={`text-sm sm:text-base transition-all duration-200 hover:text-brand ${
+            className={
               pathname?.startsWith('/posts') 
-                ? 'text-brand font-medium border-b-2 border-brand pb-1' 
-                : 'text-text hover:scale-105'
-            }`}
+                ? 'active' 
+                : ''
+            } 
           >
             文章
           </Link>
           <Link 
             href="/about" 
-            className={`text-sm sm:text-base transition-all duration-200 hover:text-brand ${
+            className={
               pathname === '/about' 
-                ? 'text-brand font-medium border-b-2 border-brand pb-1' 
-                : 'text-text hover:scale-105'
-            }`}
+                ? 'active' 
+                : ''
+            } 
           >
             关于
           </Link>
